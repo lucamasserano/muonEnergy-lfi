@@ -3,7 +3,9 @@ import numpy as np
 from tqdm import tqdm
 import inspect
 
-from muon_regression.scripts.prep_data import singleroot_to_hdf5
+import sys
+sys.path.append("../../muon_regression/muon_regression")
+from scripts.prep_data import singleroot_to_hdf5
 
 
 def squeeze_data(data):
