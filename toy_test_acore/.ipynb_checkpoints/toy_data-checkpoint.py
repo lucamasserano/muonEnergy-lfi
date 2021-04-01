@@ -41,22 +41,6 @@ def plot_data(train_set, test_set):
     ax[1].set(xlabel=r'$\theta$', ylabel='x')
     plt.show()
     
-def plot_conf_band(acore, return_df=False):
-    df_plot = pd.DataFrame({"obs_x": acore.model.obs_x.reshape(-1), 
-                            "obs_theta": acore.model.obs_param, 
-                            "lower": [min(l) for l in acore.conf_band],
-                            "upper": [max(l) for l in acore.conf_band],
-                            "lower_err": [abs(min(l) - acore.model.obs_param[i]) for i, l in enumerate(acore.conf_band)],
-                            "upper_err": [abs(max(l) - acore.model.obs_param[i]) for i, l in enumerate(acore.conf_band)]})
-    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10,10))
-    sns.scatterplot(x=df_plot.loc[:, "obs_theta"], y=df_plot.loc[:, "obs_x"], ax=ax)
-    ax.errorbar(df_plot.loc[:, "obs_theta"], df_plot.loc[:, "obs_x"], 
-                xerr=df_plot.loc[:, ["lower_err", "upper_err"]].T.to_numpy(), 
-                ecolor="red", fmt='none')
-    ax.set(xlabel=r'$\theta$', ylabel='x')
-    plt.show()
-    if return_df:
-        return df_plot
     
 def plot_vectors(vectors, title='VIZ', labels=None, dimensions=3, view_init=(0, 0), fig_size=(10,10)):
     """

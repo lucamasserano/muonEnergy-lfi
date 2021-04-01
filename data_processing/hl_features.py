@@ -27,6 +27,9 @@ def squeeze_data(data):
         [description]
     """
     # TODO: what if calo shape is (1,1,50,32,32)? We remain with three dims
+    if data.shape[0] == 1:
+        raise ValueError("Squeezing this will cause problems. Too many dimensions will be lost.")
+    
     if len(data.shape) == 5:
         return data.squeeze()
     elif len(data.shape) != 4:
